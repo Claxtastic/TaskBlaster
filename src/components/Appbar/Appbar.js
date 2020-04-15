@@ -19,7 +19,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    toolbar: theme.mixins.toolbar,
+    // toolbar: theme.mixins.toolbar,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -128,9 +128,9 @@ export default function Appbar() {
         <Divider />
         <MenuList>
             <MenuItem component={Link} to="/">Home</MenuItem>
-            <MenuItem component={Link} to="/other">Other</MenuItem>
+            <MenuItem component={Link} to="/tasks">Tasks</MenuItem>
         </MenuList>
-      </Drawer>>
+      </Drawer>
     </div>
   );
 }
