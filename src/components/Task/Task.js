@@ -17,8 +17,6 @@ const styles = theme => ({
 });
 
 class Task extends React.Component {
-    // TODO: Give this text data input by user
-
     render () {
       const { classes } = this.props;
   
@@ -26,12 +24,12 @@ class Task extends React.Component {
         <Card className={classes.card}>
           <CardContent>
             <Typography className={classes.cardTypography}>
-              Example card {this.props.number}
+              {this.props.value}
             </Typography>
           </CardContent>
           <CardActions>
               {/* Arrow function because we don't want the function to run when the Task component is created */}
-              <Button size="small" onClick={() => this.props.removeChild(this.props.number)}>REMOVE</Button>
+              <Button size="small" onClick={() => this.props.removeTask(this.props.number)}>REMOVE</Button>
           </CardActions>
         </Card>
       )}
