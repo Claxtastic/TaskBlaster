@@ -12,16 +12,50 @@ class AddTaskDialog extends React.Component {
         super(props);
         this.state = { 
             title: "",
+            subTaskFields: [],
+            subTasks: []
         };
     }
 
+    // Send the task title and list of subtasks back to the Tasks component
     submitHandler = (event) => {
         event.preventDefault();
-        this.props.addTask(this.state.title);
+        this.props.addTask(this.state.title, this.state.subTasks);
     }
 
+    // Handles changes to ANY of the fields (title or subtask)
     changeHandler = (event) => {
-        this.setState({ title: event.target.value });
+        console.log(event.target.value)
+        console.log(event.target.name)
+        this.setState({ 
+            ...this.state,
+            [event.target.name]: event.target.value, 
+        });
+    }
+
+    addSubTaskText = (event) => {
+        this.setState({
+            subTasks: [
+                ...this.state.subTasks,
+                event.target.value
+            ]
+        })
+    }
+
+    addSubTaskField = (event) => {
+        this.setState({
+            subTaskFields: [
+                ...this.state.subTaskFields,
+                <TextField
+                    name="subTaskField"
+                    margin="dense"
+                    label="Sub Task"
+                    onChange={this.addSubTaskText}
+                    fullWidth
+                    autoFocus
+                />
+            ]
+        });
     }
 
     render() {
@@ -38,16 +72,20 @@ class AddTaskDialog extends React.Component {
                         <DialogContent>
                             <DialogContentText>
                                 <TextField
-                                    autoFocus
+                                    name="title"
                                     margin="dense"
-                                    id="name"
                                     label="Task Title"
                                     onChange={this.changeHandler}
                                     fullWidth
+                                    autoFocus
                                 />
                             </DialogContentText>
+                            <div classname="subTasks">
+                                {this.state.subTaskFields}
+                            </div>
                         </DialogContent>
                         <DialogActions>
+                            <Button onClick={() => this.addSubTaskField()} color="primary">ADD SUBTASK</Button>
                             <Button type="submit" color="primary">
                                 Save
                             </Button>
@@ -60,6 +98,11 @@ class AddTaskDialog extends React.Component {
             </div>
         )
     }
+}
+
+function SubTask() {
+    return (null
+    )
 }
 
 export default AddTaskDialog;

@@ -48,7 +48,8 @@ class Tasks extends React.Component {
         this.removeTask = this.removeTask.bind(this);
     }
 
-    addTask(value) {
+    // Create a Task component and add it to the list of tasks
+    addTask(title, subTasks) {
         this.setState({
             tasks: [
                 ...this.state.tasks,
@@ -56,7 +57,8 @@ class Tasks extends React.Component {
                     key={this.state.tasks.length} 
                     number={this.state.tasks.length}
                     removeTask={this.removeTask}
-                    value={value}
+                    title={title}
+                    subTasks={subTasks}
                 />
             ]
         });
