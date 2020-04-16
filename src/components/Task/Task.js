@@ -53,9 +53,9 @@ class Task extends React.Component {
           <Typography className={classes.cardTypography}>
             {this.props.title}
           </Typography>
-          {/* TODO: make this a list */}
           <List>
-            {this.props.subTasks.map((subTask, index) => { 
+            {/* Maybe don't use Object.keys() here.... */}
+            {Object.keys(this.props.subTasks).map((index) => { 
               return (
                 <ListItem 
                   key={index}
@@ -70,7 +70,7 @@ class Task extends React.Component {
                         disableRipple
                       />
                     </ListItemIcon>
-                    <ListItemText primary={subTask} />
+                    <ListItemText primary={this.props.subTasks[index]} />
                 </ListItem>
               );
             })}

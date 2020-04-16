@@ -13,7 +13,7 @@ class AddTaskDialog extends React.Component {
         this.state = { 
             title: "",
             subTaskFields: [],
-            subTasks: []
+            subTasks: {}
         };
     }
 
@@ -35,10 +35,10 @@ class AddTaskDialog extends React.Component {
 
     addSubTaskText = (event) => {
         this.setState({
-            subTasks: [
+            subTasks: {
                 ...this.state.subTasks,
-                event.target.value
-            ]
+                [event.target.name]: event.target.value
+            }
         })
     }
 
@@ -47,7 +47,7 @@ class AddTaskDialog extends React.Component {
             subTaskFields: [
                 ...this.state.subTaskFields,
                 <TextField
-                    name="subTaskField"
+                    name={this.state.subTaskFields.length}
                     margin="dense"
                     label="Sub Task"
                     onChange={this.addSubTaskText}
