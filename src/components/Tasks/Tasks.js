@@ -4,6 +4,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import Box from '@material-ui/core/Box';
 import Task from '../Task/Task';
+import AddTaskDialog from '../AddTaskDialog/AddTaskDialog';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -34,11 +35,10 @@ const styles = theme => ({
 class Tasks extends React.Component {
     constructor() {
         super();
-
-        this.state = {
-            children: []
+        this.state = { 
+            children: [],
+            showDialog: false
         }
-
         this.removeChild = this.removeChild.bind(this);
     }
 
@@ -53,6 +53,7 @@ class Tasks extends React.Component {
                 />
             ]
         });
+        this.hideDialog();
     }
 
     removeChild(key) {
@@ -60,6 +61,18 @@ class Tasks extends React.Component {
             children:
                 this.state.children.filter(child => child.props.number !== key)
         })
+    }
+
+    showDialog() {
+        this.setState({
+            showDialog: true
+        });
+    }
+
+    hideDialog() {
+        this.setState({
+            showDialog: false
+        });
     }
 
     render () {
@@ -76,10 +89,13 @@ class Tasks extends React.Component {
                 className={classes.fab}
                 color="secondary" 
                 aria-label="add task" 
-                onClick={() => this.appendChild()}
+                // onClick={() => this.appendChild()}
+                onClick={() => this.showDialog()}
             >
                 <AddIcon />
             </Fab>
+            {/* Bind hideDialog to this Tasks reference, otherwise the close button on the dialog will be NPE */}
+            {this.state.showDialog ? <AddTaskDialog addNewTask={this.appendChild.bind(this)} hideDialog={this.hideDialog.bind(this)} /> : null}
         </div>
         )
     }
