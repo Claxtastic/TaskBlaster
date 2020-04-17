@@ -49,19 +49,36 @@ class Tasks extends React.Component {
     }
 
     // Create a Task component and add it to the list of tasks
-    addTask(title, subTasks) {
-        this.setState({
-            tasks: [
-                ...this.state.tasks,
-                <Task 
-                    key={this.state.tasks.length} 
-                    number={this.state.tasks.length}
-                    removeTask={this.removeTask}
-                    title={title}
-                    subTasks={subTasks}
-                />
-            ]
-        });
+    addTask(title, subTasks, dueDate) {
+        if (dueDate !== null) {
+            const formattedDueDate = `${dueDate.toLocaleString('default', {month: 'long'})} ${dueDate.getDate()}`;
+            this.setState({
+                tasks: [
+                    ...this.state.tasks,
+                    <Task 
+                        key={this.state.tasks.length} 
+                        number={this.state.tasks.length}
+                        removeTask={this.removeTask}
+                        title={title}
+                        subTasks={subTasks}
+                        dueDate={formattedDueDate}
+                    />
+                ]
+            });
+        } else {
+            this.setState({
+                tasks: [
+                    ...this.state.tasks,
+                    <Task 
+                        key={this.state.tasks.length} 
+                        number={this.state.tasks.length}
+                        removeTask={this.removeTask}
+                        title={title}
+                        subTasks={subTasks}
+                    />
+                ]
+            });
+        }
         this.hideDialog();
     }
 

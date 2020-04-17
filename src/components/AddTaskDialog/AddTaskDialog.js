@@ -5,7 +5,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
-import { TextField } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import DateFnsUtils from '@date-io/date-fns';
+import EventNoteIcon from '@material-ui/icons/EventNote';
+import IconButton from '@material-ui/core/IconButton';
+import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 class AddTaskDialog extends React.Component {
     constructor(props) {
@@ -13,24 +17,34 @@ class AddTaskDialog extends React.Component {
         this.state = { 
             title: "",
             subTaskFields: [],
-            subTasks: {}
+            // Subtasks is a map of index -> text
+            subTasks: {},
+            showDatePicker: false,
+            selectedDate: new Date(),
         };
     }
 
-    // Send the task title and list of subtasks back to the Tasks component
+    // Send the task data back to the Tasks component
     submitHandler = (event) => {
         event.preventDefault();
-        this.props.addTask(this.state.title, this.state.subTasks);
+        var dueDate;
+        this.state.showDatePicker ? dueDate = this.state.selectedDate : dueDate = null;
+        this.props.addTask(this.state.title, this.state.subTasks, dueDate);
     }
 
-    // Handles changes to ANY of the fields (title or subtask)
+    // Handles changes to title and subtask the fields 
     changeHandler = (event) => {
-        console.log(event.target.value)
-        console.log(event.target.name)
         this.setState({ 
             ...this.state,
             [event.target.name]: event.target.value, 
         });
+    }
+
+    // Handles selected date from date picker
+    handleDateChange = (selectedDate) => {
+        this.setState({
+            selectedDate: selectedDate
+        })
     }
 
     addSubTaskText = (event) => {
@@ -42,12 +56,14 @@ class AddTaskDialog extends React.Component {
         })
     }
 
-    addSubTaskField = (event) => {
+    addSubTaskField = () => {
         this.setState({
             subTaskFields: [
                 ...this.state.subTaskFields,
+                // Clean these attributes maybe lol
                 <TextField
-                    name={this.state.subTaskFields.length}
+                    key={this.state.subTaskFields.length}
+                    name={`${this.state.subTaskFields.length}`}
                     margin="dense"
                     label="Sub Task"
                     onChange={this.addSubTaskText}
@@ -92,17 +108,28 @@ class AddTaskDialog extends React.Component {
                             <Button onClick={() => this.props.hideDialog()} color="primary">
                                 Close
                             </Button>
+
+                            <IconButton onClick={() => this.setState({showDatePicker: !this.state.showDatePicker})}>
+                                <EventNoteIcon />
+                            </IconButton>
+
+                            {this.state.showDatePicker ? 
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>     
+                                    <DateTimePicker
+                                        name="selectedDate"
+                                        variant="inline"
+                                        value={this.state.selectedDate}
+                                        onChange={this.handleDateChange}
+                                    />
+                                </MuiPickersUtilsProvider> :
+                                null
+                            }
                         </DialogActions>
                     </form>
                 </Dialog>
             </div>
         )
     }
-}
-
-function SubTask() {
-    return (null
-    )
 }
 
 export default AddTaskDialog;

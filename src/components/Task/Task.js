@@ -75,6 +75,9 @@ class Task extends React.Component {
               );
             })}
           </List>
+          <Typography>
+            {this.props.dueDate}
+          </Typography>
         </CardContent>
         <CardActions>
           {/* Arrow function because we don't want the function to run when the Task component is created */}
