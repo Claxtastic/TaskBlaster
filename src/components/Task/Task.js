@@ -7,17 +7,23 @@ import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import EventNoteIcon from '@material-ui/icons/EventNote';
 import ListItemText from '@material-ui/core/ListItemText';
 import { withStyles } from '@material-ui/core/styles';
 import { Checkbox } from '@material-ui/core';
 
 const styles = theme => ({
     card: {
-        minWidth: 275,
-        margin: "5px 0",
+      minWidth: 275,
+      margin: "5px 0",
     },
     cardTypography: {
-        fontSize: "calc(4px + 2vmin)",
+      fontSize: "calc(4px + 2vmin)",
+    },
+    dateContainer: {
+      position: "fixed",
+      bottom: theme.spacing(1),
+      right: theme.spacing(1)
     }
 });
 
@@ -75,14 +81,13 @@ class Task extends React.Component {
               );
             })}
           </List>
-          <Typography>
-            {this.props.dueDate}
-          </Typography>
         </CardContent>
         <CardActions>
           {/* Arrow function because we don't want the function to run when the Task component is created */}
           <Button size="small" onClick={() => this.props.removeTask(this.props.number)}>REMOVE</Button>
+          {/* TODO: Implement done button */}
           <Button size="small" onClick={() => null}>DONE</Button>
+          {this.props.dueDate === undefined ? null : <Button size="small"> <EventNoteIcon /> {this.props.dueDate} </Button>}
         </CardActions>
       </Card>
     )}
