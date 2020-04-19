@@ -10,6 +10,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { MenuList, MenuItem } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -56,15 +58,6 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
   contentShift: {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
@@ -72,7 +65,14 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  button: {
+    color: "white",
+  }
 }));
+
+const goToLogin = () => {
+  console.log("Going to login");
+};
 
 export default function Appbar() {
   const classes = useStyles();
@@ -90,27 +90,39 @@ export default function Appbar() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            TaskBlaster
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Grid container>
+        <AppBar
+          position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
+          })}
+        >
+          <Toolbar>
+            <Grid item>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                className={clsx(classes.menuButton, open && classes.hide)}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <Typography type="title" variant="h6" noWrap>
+                TaskBlaster
+              </Typography>
+            </Grid>
+            {/* Pad out the middle of the appbar */}
+            <Grid item xs />
+            <Grid item>
+              <Button className={classes.button} onClick={goToLogin}> Login </Button>
+            </Grid>
+          </Toolbar>
+        </AppBar>
+      </Grid>
+
       <Drawer
         className={classes.drawer}
         variant="persistent"
