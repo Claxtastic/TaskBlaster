@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import Task from '../Task/Task';
 import AddTaskDialog from '../AddTaskDialog/AddTaskDialog';
 import Typography from '@material-ui/core/Typography';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
     content: {

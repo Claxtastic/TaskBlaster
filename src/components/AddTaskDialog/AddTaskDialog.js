@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from '@date-io/date-fns';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import IconButton from '@material-ui/core/IconButton';
+import Box from '@material-ui/core/Box';
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 class AddTaskDialog extends React.Component {
@@ -76,7 +77,7 @@ class AddTaskDialog extends React.Component {
 
     render() {
         return (
-            <div>
+            <Box>
                 <Dialog
                     open={true}
                     aria-labelledby="add-new-dialog"
@@ -96,9 +97,7 @@ class AddTaskDialog extends React.Component {
                                     autoFocus
                                 />
                             </DialogContentText>
-                            <div classname="subTasks">
-                                {this.state.subTaskFields}
-                            </div>
+                            {this.state.subTaskFields}
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={() => this.addSubTaskField()} color="primary">ADD SUBTASK</Button>
@@ -127,7 +126,7 @@ class AddTaskDialog extends React.Component {
                         </DialogActions>
                     </form>
                 </Dialog>
-            </div>
+            </Box>
         )
     }
 }

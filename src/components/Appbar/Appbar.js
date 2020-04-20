@@ -58,22 +58,6 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
   button: {
     color: "white",
   }
@@ -92,6 +76,8 @@ export default function Appbar() {
     setOpen(false);
   };
 
+  // TODO:
+  // Return different appbars for unauthenticated and authenticated
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -121,6 +107,9 @@ export default function Appbar() {
             </Grid>
             {/* Pad out the middle of the appbar */}
             <Grid item xs />
+            <Grid item>
+              <Button className={classes.button} component={Link} to="/signup"> Sign Up </Button>
+            </Grid>
             <Grid item>
               <Button className={classes.button} component={Link} to="/login"> Login </Button>
             </Grid>
