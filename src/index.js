@@ -2,12 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import App from './components/App/App';
+import Appbar from './components/Appbar/Appbar';
+import Tasks from './components/Tasks/Tasks';
+import Login from './components/Login/Login';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
+    {/* Appbar shows above whatever the component is, chosen by Switch */}
+    <Appbar />
     <App />
-  </React.StrictMode>,
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

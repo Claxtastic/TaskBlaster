@@ -1,36 +1,22 @@
 import React from 'react';
-import Appbar from '../Appbar/Appbar';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import logo from '../Images/logo.svg';
+import Home from '../Home/Home';
 import Tasks from '../Tasks/Tasks';
-import './App.css';
+import Login from '../Login/Login';
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/tasks">
-            <Tasks />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </div>
-  );
-}
-
-function Home() {
-  return (
-    <div className="App">
-      <Appbar />
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        Home
-      </header>
-    </div>
+    <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route exact path="/tasks">
+        <Tasks />
+      </Route>
+      <Route exact path="/login">
+        <Login />
+      </Route>
+    </Switch>
   );
 }
 

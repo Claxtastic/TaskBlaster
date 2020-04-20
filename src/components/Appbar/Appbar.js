@@ -58,6 +58,15 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: -drawerWidth,
+  },
   contentShift: {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
@@ -69,10 +78,6 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
   }
 }));
-
-const goToLogin = () => {
-  console.log("Going to login");
-};
 
 export default function Appbar() {
   const classes = useStyles();
@@ -117,7 +122,7 @@ export default function Appbar() {
             {/* Pad out the middle of the appbar */}
             <Grid item xs />
             <Grid item>
-              <Button className={classes.button} onClick={goToLogin}> Login </Button>
+              <Button className={classes.button} component={Link} to="/login"> Login </Button>
             </Grid>
           </Toolbar>
         </AppBar>

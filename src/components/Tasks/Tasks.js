@@ -1,5 +1,4 @@
 import React from 'react';
-import Appbar from '../Appbar/Appbar';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import Box from '@material-ui/core/Box';
@@ -106,7 +105,6 @@ class Tasks extends React.Component {
 
       return (
         <div className={classes.content}>
-            <Appbar />
             {this.state.tasks.length === 0 ? 
                     <Typography className={classes.typography}>There are no tasks to show!</Typography> 
                     : null}
