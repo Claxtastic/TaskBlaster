@@ -53,7 +53,7 @@ function Login() {
             <Typography className={classes.typography} component="h1" variant="h5">
                 Sign in
             </Typography>
-            <form onSubmit={doLogin} novalidate>
+            <form onSubmit={doLogin} noValidate>
                 <TextField
                     className={classes.field}
                     InputLabelProps={{className: classes.label}}
@@ -78,8 +78,7 @@ function Login() {
                     autoComplete="current-password"
                     onChange={changeHandler}
                     required
-                    fullWidth
-                    autoFocus />
+                    fullWidth />
                 <FormControlLabel
                     className={classes.controlLabel}
                     control={<Checkbox value="remember" color="white" />}
