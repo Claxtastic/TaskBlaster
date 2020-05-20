@@ -18,19 +18,21 @@ final class StatisticsSet implements Statistics{
     int tasksCompleted;
     double completionPercentage;
     double userRating;
+    int numRating;
     double taskBlasterRating;
 
     /**
      * StatisticsSet constructor
      */
-    StatisticsSet(User u, int ct, int ta, int tc, double cp, double ur, double tbr) {
+    StatisticsSet(User u, int ct, int ta, int tc, double ur, int num) {
         this.user = u;
         this.currentTask = ct;
         this.tasksAttempted = ta;
         this.tasksCompleted = tc;
-        this.completionPercentage = cp;
+        this.completionPercentage = this.tasksAttempted/this.tasksCompleted;
         this.userRating = ur;
-        this.taskBlasterRating = tbr;
+        this.numRating = num;
+        this.taskBlasterRating = this.completionPercentage * this.userRating;
     }
 
     /**
@@ -99,7 +101,15 @@ final class StatisticsSet implements Statistics{
     public double userRating() {
         return userRating;
     }
-
+    /**
+     * Returns the total number of ratings.
+     * Invariant: numRating() greater than 0 or less than 5.
+     *
+     * @return int  num rating - number of ratings
+     */
+    public int numRating() {
+        return numRating;
+    }
     /**
      * Returns the task blaster software rating based on total performance.
      * A combination of completion percentage and user rating.
@@ -153,4 +163,10 @@ final class StatisticsSet implements Statistics{
     public int hashCode() {
         return user.hashCode();
     }
+
+    /**
+     * Return a copy of the StatisticsSet
+     * @return StatisticsSet copy of statisticsset
+     */
+    StatisticsSet copy() { return new StatisticsSet(user, currentTask, tasksAttempted, tasksCompleted, userRating, numRating);}
 }

@@ -57,6 +57,13 @@ public interface Statistics {
      */
     public double userRating();
     /**
+     * Returns the total number of ratings.
+     * Invariant: numRating() greater than 0 or less than 5.
+     *
+     * @return int  num rating - number of ratings
+     */
+    public int numRating();
+    /**
      * Returns the task blaster software rating based on total performance.
      * A combination of completion percentage and user rating.
      * Invariant: taskBlasterRating() greater than or equal to 0.

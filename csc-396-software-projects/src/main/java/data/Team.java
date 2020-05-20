@@ -8,9 +8,10 @@ import java.util.Iterator;
 
 /**
  * Interface for a team
- * 
+ * A collection of StatisticSets.
+ * StatisticSets can only be created and destroyed using the Team
  * @author Stephen Kim
- *  
+ * @see Data
  */
 public interface Team {
 
