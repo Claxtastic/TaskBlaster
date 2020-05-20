@@ -8,12 +8,12 @@ package data;
  * 
  * @author Stephen Kim
  */
-public class Administrator extends UserCommonCode implements User {
+public class UserAdministrator extends UserCommonCode implements User {
 
 	/**
 	 * Student constructor with name and password
 	 */
-	Administrator (String name, String password) {
+	UserAdministrator (String name, String password) {
 		super(name, password);
 	}
 	

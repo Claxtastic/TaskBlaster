@@ -9,12 +9,12 @@ package data;
  * @author Stephen Kim
  *
  */
-public class Student extends UserCommonCode implements User {
+public class UserStudent extends UserCommonCode implements User {
 
 	/**
 	 * Student constructor with name and password
 	 */
-	Student(String name, String password) {
+	UserStudent(String name, String password) {
 		super(name, password);
 	}
 
