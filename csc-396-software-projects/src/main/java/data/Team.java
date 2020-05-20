@@ -6,7 +6,7 @@ package data;
 /**
  * Interface for a team
  * 
- * @author Team6
+ * @author Stephen Kim
  *  
  */
 public interface Team {

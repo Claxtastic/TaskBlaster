@@ -6,13 +6,15 @@ package data;
 /**
  * Administrator class with full permissions
  * 
- * @author Team6
+ * @author Stephen Kim
  */
-public class Administrator implements User {
+public class Administrator extends UserCommonCode implements User {
 
-	//Administrator constructor
-	private Administrator() {
-		
+	/**
+	 * Student constructor with name and password
+	 */
+	Administrator (String name, String password) {
+		super(name, password);
 	}
 	
 }

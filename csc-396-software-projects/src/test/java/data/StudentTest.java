@@ -53,5 +53,20 @@ public class StudentTest {
         );
     }
 
+    //Verify student constructor inputs are correct
+    //Test that null inputs throws NullPointerException
+    @ParameterizedTest(name = "Verify constructor inputs are correct")
+    @MethodSource("studentConstructorTests")
+    void studentConstructorTest(String name, String pass, Student expected) {
+        Student kid = new Student(name, pass);
+        assertEquals(expected, kid);
+    }
+
+    private static Stream<Arguments> studentConstructorTests() {
+        return Stream.of(
+                Arguments.of("Bill Gates", "Microsoft", new Student("Bill Gates", "Microsoft")),
+                Arguments.of("Steve Jobs", "Apple", new Student("Steve Jobs", "Apple"))
+        );
+    }
 
 }

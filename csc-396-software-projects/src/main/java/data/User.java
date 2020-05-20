@@ -3,7 +3,7 @@ package data;
 /**
  * Interface for all users of the program
  * 
- * @author Team6
+ * @author Stephen Kim
  *
  */
 public interface User {

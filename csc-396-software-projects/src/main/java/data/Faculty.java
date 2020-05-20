@@ -6,14 +6,16 @@ package data;
 /**
  * Faculty class has more permissions than the student but less than administrator 
  * 
- * @author Team6
+ * @author Stephen Kim
  *
  */
-public class Faculty implements User {
+public class Faculty extends UserCommonCode implements User {
 
-	//Faculty constructor
-	private Faculty() {
-		
+	/**
+	 * Student constructor with name and password
+	 */
+	Faculty (String name, String password) {
+		super(name, password);
 	}
 	
 }
