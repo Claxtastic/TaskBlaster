@@ -17,12 +17,12 @@ public class Student implements User {
 
 	//Student constructor with name and password
 	Student(String name, String password) {
-		//If name is null, throw NullPointerException
-		if (name == null ) {
+		//If name or password is null, throw NullPointerException
+		if (name == null || password == null) {
 			throw new NullPointerException(("Name cannot be null"));
 		}
-		//If name is empty string, throw IllegalArgumentException
-		if (name == "" || name == " ") {
+		//If name or password is empty string, throw IllegalArgumentException
+		if (name == "" || name == " " || password == "" || password == " ") {
 			throw new IllegalArgumentException("Name cannot be empty string");
 		}
 		this._name = name;
