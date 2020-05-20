@@ -9,7 +9,7 @@ package data;
  * @author Stephen Kim
  *
  */
-public class UserFaculty extends UserCommonCode implements User {
+final class UserFaculty extends UserCommonCode implements User {
 
 	/**
 	 * Student constructor with name and password

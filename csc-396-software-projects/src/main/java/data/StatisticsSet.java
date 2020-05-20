@@ -1,9 +1,36 @@
 package data;
 
-public class StatisticsSet implements Statistics{
+/**
+ * Implementation of Statistics interface.
+ *
+ * <p>This is a utility class for TeamRoster.  Fields are mutable and
+ * package-private.</p>
+ *
+ * <p><b>Class Invariant:</b> No two instances may reference the same User.</p>
+ *
+ * @see Statistics
+ */
+final class StatisticsSet implements Statistics{
 
-    StatisticsSet() {
+    User user;
+    int currentTask;
+    int tasksAttempted;
+    int tasksCompleted;
+    double completionPercentage;
+    double userRating;
+    double taskBlasterRating;
 
+    /**
+     * StatisticsSet constructor
+     */
+    StatisticsSet(User u, int ct, int ta, int tc, double cp, double ur, double tbr) {
+        this.user = u;
+        this.currentTask = ct;
+        this.tasksAttempted = ta;
+        this.tasksCompleted = tc;
+        this.completionPercentage = cp;
+        this.userRating = ur;
+        this.taskBlasterRating = tbr;
     }
 
     /**
@@ -14,7 +41,18 @@ public class StatisticsSet implements Statistics{
      */
     @Override
     public User user() {
-        return null;
+        return user;
+    }
+
+    /**
+     * Returns the id of current task that user is attempting.
+     * Null if not working on any task.
+     *
+     * @return int    current task
+     */
+    @Override
+    public int currentTask() {
+        return currentTask;
     }
 
     /**
@@ -25,7 +63,7 @@ public class StatisticsSet implements Statistics{
      */
     @Override
     public int tasksAttempted() {
-        return 0;
+        return tasksAttempted;
     }
 
     /**
@@ -36,7 +74,7 @@ public class StatisticsSet implements Statistics{
      */
     @Override
     public int tasksCompleted() {
-        return 0;
+        return tasksCompleted;
     }
 
     /**
@@ -47,7 +85,7 @@ public class StatisticsSet implements Statistics{
      */
     @Override
     public double completionPercentage() {
-        return 0;
+        return completionPercentage;
     }
 
     /**
@@ -59,7 +97,7 @@ public class StatisticsSet implements Statistics{
      */
     @Override
     public double userRating() {
-        return 0;
+        return userRating;
     }
 
     /**
@@ -71,6 +109,48 @@ public class StatisticsSet implements Statistics{
      */
     @Override
     public double taskBlasterRating() {
-        return 0;
+        return taskBlasterRating;
+    }
+
+    /**
+     *  Return a string representation of the object in the following format:
+     * "user [currentTask, tasksAttempted, tasksCompleted, completionPercentage, userRating, taskBlasterRating]".
+     * @return string  Statistics as a string
+     */
+    @Override
+    public String toString() {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(user);
+        buffer.append(" [");
+        buffer.append(currentTask);
+        buffer.append(",");
+        buffer.append(tasksAttempted);
+        buffer.append(",");
+        buffer.append(tasksCompleted);
+        buffer.append(",");
+        buffer.append(completionPercentage);
+        buffer.append(",");
+        buffer.append(userRating);
+        buffer.append(",");
+        buffer.append(taskBlasterRating);
+        buffer.append("]");
+        return buffer.toString();
+    }
+
+    /**
+     * Compare this object's with parameter object's user.
+     * @param that the Object to be compared.
+     * @return true if this object is the same as the obj argument;
+     * false otherwise.
+     */
+    public boolean equals(Object that) {
+        return user.equals(((StatisticsSet)that).user());
+    }
+
+    /**
+     * Return the hash code of the user for the StatisticsSet
+     */
+    public int hashCode() {
+        return user.hashCode();
     }
 }

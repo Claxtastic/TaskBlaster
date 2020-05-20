@@ -20,7 +20,13 @@ public interface Statistics {
      * @return User      user
      */
     public User user();
-
+    /**
+     * Returns the id of current task that user is attempting.
+     * Null if not working on any task.
+     *
+     * @return int    current task
+     */
+    public int currentTask();
     /**
      * Returns the number of tasks attempted by the user on the team roster.
      * Invariant: tasksAttempted() greater than or equal to 0.
@@ -60,7 +66,7 @@ public interface Statistics {
     public double taskBlasterRating();
     /**
      *  Return a string representation of the object in the following format:
-     * "user [tasksAttempted, tasksCompleted, completionPercentage, userRating, taskBlasterRating]".
+     * "user [currentTask, tasksAttempted, tasksCompleted, completionPercentage, userRating, taskBlasterRating]".
      * @return string  Statistics as a string
      */
     public String toString();

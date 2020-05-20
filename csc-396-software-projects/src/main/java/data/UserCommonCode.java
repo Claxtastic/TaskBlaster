@@ -68,8 +68,8 @@ abstract class UserCommonCode {
         if (that == this) {
             return true;
         }
-        //Check if object is an instance of Student,
-        if (!(that instanceof Student)) {
+        //Check if object is an instance of User,
+        if (!(that instanceof User)) {
             return false;
         }
         //Typecast object to Student to compare attributes
@@ -98,21 +98,21 @@ abstract class UserCommonCode {
      */
     public int compareTo(Object thatObject) {
 
-        Student kid = (Student) thatObject;
+        User kid = (User) thatObject;
 
         //If thatObject is null and this is not null, throw a NullPointerException
         if (thatObject == null && this != null)
             throw new NullPointerException();
         //If thatObject is not an instance of Student, throw ClassCastException
-        if (!(thatObject instanceof Student))
+        if (!(thatObject instanceof User))
             throw new ClassCastException("Object is incompatible type");
 
         // Compare name
-        int nameDiff = this._name.compareTo(kid._name);
+        int nameDiff = this._name.compareTo(kid.getName());
         if (nameDiff != 0) return nameDiff;
 
         // Compare password
-        int pwDiff = this._password.compareTo(kid._password);
+        int pwDiff = this._password.compareTo(kid.getPassword());
         if (pwDiff != 0) return pwDiff;
 
         return 0; //All fields are equal
