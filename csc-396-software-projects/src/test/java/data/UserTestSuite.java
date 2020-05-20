@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 //Run tests on student class
-public class StudentTest {
+public class UserTestSuite {
 
     /*
     All Constructor Tests
