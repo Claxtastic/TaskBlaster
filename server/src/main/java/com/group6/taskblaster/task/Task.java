@@ -2,6 +2,7 @@ package com.group6.taskblaster.task;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,25 +16,28 @@ public class Task {
     private long id;
 
     private String title;
-    // private List<String> subtasks;
+
+    @ElementCollection(targetClass=String.class)
+    private List<String> subtasks;
+
     private Date dueDate;
 
     public Task() { }
 
-    public Task(String title, Date dueDate) {
+    public Task(String title, List<String> subtasks, Date dueDate) {
         this.title = title;
-        // this.subtasks = subtasks;
+        this.subtasks = subtasks;
         this.dueDate = dueDate;
     }
 
     public long getId() { return this.id; }
     public String getTitle() { return this.title; }
-    // public List<String> getSubtasks() { return subtasks; }
+    public List<String> getSubtasks() { return subtasks; }
     public Date getDueDate() { return this.dueDate; }
 
     public void setId(final long id) { this.id = id; }
     public void setTitle(final String title) { this.title = title; }
-    // public void setSubttasks(final List<String> subtasks) { this.subtasks = subtasks; }
+    public void setSubttasks(final List<String> subtasks) { this.subtasks = subtasks; }
     public void setDueDate(final Date date) { this.dueDate = date; }
 
     @Override
