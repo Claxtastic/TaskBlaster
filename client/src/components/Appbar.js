@@ -15,6 +15,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { MenuList, MenuItem } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import * as logo from '../images/logo_no_bg.png';
 
 const drawerWidth = 240;
 
@@ -60,6 +61,13 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     color: "white",
+  },
+  logo: {
+    height: "auto",
+    width: "auto",
+    maxHeight: "64px",
+    maxWidth: "250px",
+    paddingTop: "11px"
   }
 }));
 
@@ -99,6 +107,9 @@ export default function Appbar() {
               >
                 <MenuIcon />
               </IconButton>
+            </Grid>
+            <Grid item>
+              <img src={logo} className={classes.logo} alt="logo" />
             </Grid>
             <Grid item>
               <Typography type="title" variant="h6" noWrap>
