@@ -2,9 +2,9 @@ import React from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import Box from '@material-ui/core/Box';
-import AddTaskDialog from '../AddTaskDialog/AddTaskDialog';
+import AddTaskDialog from './AddTaskDialog';
 import Typography from '@material-ui/core/Typography';
-import TaskService from '../../service/TaskService';
+import TaskAPI from '../api/TaskAPI';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -49,7 +49,7 @@ class Tasks extends React.Component {
     }
 
     componentDidMount() {
-        TaskService.getAllTasks(this.removeTask.bind(this))
+        TaskAPI.getAllTasks(this.removeTask.bind(this))
             .then(taskComponents => {
                 this.setState({
                     tasks: taskComponents
@@ -70,7 +70,7 @@ class Tasks extends React.Component {
 
     removeTask(key) {
         console.log(`Attempting to delete Task id = ${key}`);
-        TaskService.deleteTask(key);
+        TaskAPI.deleteTask(key);
         this.setState({
             tasks:
                 this.state.tasks.filter(task => task.props.number !== key)

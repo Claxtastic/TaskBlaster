@@ -1,5 +1,5 @@
 import React from 'react';
-import Task from '../components/Task/Task';
+import Task from '../components/Task';
 
 const API_URL = 'http://localhost:8080';
 const HEADERS =  {
@@ -7,7 +7,7 @@ const HEADERS =  {
     'Content-Type' : 'application/json;charset=UTF-8'
 };
 
-class TaskService {
+class TaskAPI {
 
     async getAllTasks(removeTask) {
         const responseJson = await (await fetch(`${API_URL}/tasks`)).json();
@@ -49,4 +49,4 @@ class TaskService {
     }
 }
 
-export default new TaskService();
+export default new TaskAPI();

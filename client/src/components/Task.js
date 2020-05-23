@@ -60,7 +60,6 @@ class Task extends React.Component {
             {this.props.title}
           </Typography>
           <List>
-            {/* Maybe don't use Object.keys() here.... */}
             {Object.keys(this.props.subTasks).map((index) => { 
               return (
                 <ListItem 

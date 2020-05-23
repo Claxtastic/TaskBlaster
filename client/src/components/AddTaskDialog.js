@@ -10,9 +10,9 @@ import DateFnsUtils from '@date-io/date-fns';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import IconButton from '@material-ui/core/IconButton';
 import Box from '@material-ui/core/Box';
-import Task from '../Task/Task';
+import Task from './Task';
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import TaskService from '../../service/TaskService';
+import TaskService from '../api/TaskAPI';
 
 class AddTaskDialog extends React.Component {
     constructor(props) {
