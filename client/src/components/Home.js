@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import logo from '../images/logo.svg';
 import './Home.css';
 
 export default function Home() {
-    document.title = "Home"
+    document.title = "Home | TaskBlaster"
 
     return (
         <div className="Home">
             <img src={logo} className="App-logo" alt="logo" />
-            Home
         </div>
     )
 }

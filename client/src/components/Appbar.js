@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -76,13 +76,6 @@ function Appbar(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  // const [title, setTitle] = React.useState(document.title);
-
-  // useEffect(() => {
-  //   props.history.listen(() => {
-  //     changeTitle(document.title);
-  //   });
-  // });
 
   const changeTitle = () => {
     switch(window.location.pathname) {
@@ -106,11 +99,7 @@ function Appbar(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  // const changeTitle = (title) => {
-  //   setTitle(title);
-  // }
-
+  
   let title = changeTitle();
   return (
     <div className={classes.root}>

@@ -45,7 +45,7 @@ class Tasks extends React.Component {
             showDialog: false
         }
         this.removeTask = this.removeTask.bind(this);
-        document.title = "Tasks";
+        document.title = "My Tasks | TaskBlaster";
     }
 
     componentDidMount() {

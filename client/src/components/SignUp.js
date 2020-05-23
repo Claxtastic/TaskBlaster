@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
@@ -47,13 +47,13 @@ const changeHandler = () => {
 }
 
 function SignUp() {
-    document.title = "Sign Up"
+    document.title = "Sign Up | TaskBlaster"
 
     const classes = useStyles();
     return (
         <Box className={classes.content}>
             <CssBaseline />
-            <Typography className={classes.typography} component="h1" variant="h5"> {document.title} </Typography>
+            <Typography className={classes.typography} component="h1" variant="h5"> {document.title.split("|")[0]} </Typography>
             <form onSubmit={doSignUp} noValidate>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
