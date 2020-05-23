@@ -45,7 +45,16 @@ class Tasks extends React.Component {
             showDialog: false
         }
         this.removeTask = this.removeTask.bind(this);
-        TaskService.getAllTasks();
+        
+    }
+
+    componentDidMount() {
+        TaskService.getAllTasks(this.removeTask.bind(this))
+            .then(taskComponents => {
+                this.setState({
+                    tasks: taskComponents
+                })
+            });
     }
 
     // Add a newly created task to the rendered list

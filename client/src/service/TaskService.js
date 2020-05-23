@@ -1,3 +1,6 @@
+import React from 'react';
+import Task from '../components/Task/Task';
+
 const API_URL = 'http://localhost:8080';
 const HEADERS =  {
     'Accept' : 'application/json',
@@ -6,10 +9,20 @@ const HEADERS =  {
 
 class TaskService {
 
-    async getAllTasks() {
-        await fetch(`${API_URL}/tasks`)
-            .then(response => response.json())
-            .then(data => console.log(data));
+    async getAllTasks(removeTask) {
+        const responseJson = await (await fetch(`${API_URL}/tasks`)).json();
+        var taskComponents = [];
+        for (let [key, taskData] of Object.entries(responseJson)) {
+            taskComponents[key] = 
+                <Task
+                    key={key}
+                    number={key} 
+                    removeTask={removeTask}
+                    title={taskData.title}
+                    subTasks={taskData.subtasks}
+                    dueDate={taskData.dueDate}/>
+        }
+        return taskComponents;
     }
 
     // TODO: Add a username to the params
