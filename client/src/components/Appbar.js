@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -16,6 +16,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { MenuList, MenuItem } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import * as logo from '../images/logo_no_bg.png';
+import { withRouter } from "react-router-dom"
 
 const drawerWidth = 240;
 
@@ -67,14 +68,36 @@ const useStyles = makeStyles((theme) => ({
     width: "auto",
     maxHeight: "64px",
     maxWidth: "250px",
-    paddingTop: "11px"
+    paddingTop: "8px"
   }
 }));
 
-export default function Appbar() {
+function Appbar(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  // const [title, setTitle] = React.useState(document.title);
+
+  // useEffect(() => {
+  //   props.history.listen(() => {
+  //     changeTitle(document.title);
+  //   });
+  // });
+
+  const changeTitle = () => {
+    switch(window.location.pathname) {
+      case '/':
+        return 'Home';
+      case '/tasks':
+        return 'My Tasks';
+      case '/login':
+        return 'Login';
+      case '/signup':
+        return 'Sign Up';
+      default:
+        return 'Home';
+    }
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -84,8 +107,11 @@ export default function Appbar() {
     setOpen(false);
   };
 
-  // TODO:
-  // Return different appbars for unauthenticated and authenticated
+  // const changeTitle = (title) => {
+  //   setTitle(title);
+  // }
+
+  let title = changeTitle();
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -112,9 +138,7 @@ export default function Appbar() {
               <img src={logo} className={classes.logo} alt="logo" />
             </Grid>
             <Grid item>
-              <Typography type="title" variant="h6" noWrap>
-                TaskBlaster
-              </Typography>
+              <Typography type="title" variant="h6" noWrap> {title} </Typography>
             </Grid>
             {/* Pad out the middle of the appbar */}
             <Grid item xs />
@@ -152,3 +176,4 @@ export default function Appbar() {
   );
 }
 
+export default withRouter(Appbar);

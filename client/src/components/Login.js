@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { CssBaseline, Container } from '@material-ui/core';
+import { CssBaseline } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     content: {
@@ -46,13 +46,13 @@ const changeHandler = () => {
 }
 
 function Login() {
+    document.title = "Login"
+
     const classes = useStyles();
     return (
         <Box className={classes.content}>
             <CssBaseline />
-            <Typography className={classes.typography} component="h1" variant="h5">
-                Sign in
-            </Typography>
+            <Typography className={classes.typography} component="h1" variant="h5"> {document.title} </Typography>
             <form onSubmit={doLogin} noValidate>
                 <TextField
                     className={classes.field}
