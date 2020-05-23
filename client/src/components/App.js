@@ -1,8 +1,8 @@
 import React from 'react';
-import Home from '../Home/Home';
-import Tasks from '../Tasks/Tasks';
-import Login from '../Login/Login';
-import SignUp from '../SignUp/SignUp';
+import Home from './Home';
+import Tasks from './Tasks';
+import Login from './Login';
+import SignUp from './SignUp';
 import { Route, Switch } from 'react-router-dom';
 
 function App() {
