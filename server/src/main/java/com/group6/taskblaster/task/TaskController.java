@@ -26,6 +26,10 @@ public class TaskController {
 
     @PostMapping("/addtask")
     public void postTask(@RequestBody Task task) {
+        System.out.println(task);
+        System.out.println(task.getTitle());
+        System.out.println(task.getSubtasks());
+        System.out.println(task.getDueDate());
         repository.save(task);
         // Task postedTask = repository.save(task);
         // URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path()

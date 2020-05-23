@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Task {
 
@@ -20,11 +22,11 @@ public class Task {
     @ElementCollection(targetClass=String.class)
     private List<String> subtasks;
 
-    private Date dueDate;
+    private String dueDate;
 
     public Task() { }
 
-    public Task(String title, List<String> subtasks, Date dueDate) {
+    public Task(String title, List<String> subtasks, String dueDate) {
         this.title = title;
         this.subtasks = subtasks;
         this.dueDate = dueDate;
@@ -33,12 +35,12 @@ public class Task {
     public long getId() { return this.id; }
     public String getTitle() { return this.title; }
     public List<String> getSubtasks() { return subtasks; }
-    public Date getDueDate() { return this.dueDate; }
+    public String getDueDate() { return this.dueDate; }
 
     public void setId(final long id) { this.id = id; }
     public void setTitle(final String title) { this.title = title; }
     public void setSubttasks(final List<String> subtasks) { this.subtasks = subtasks; }
-    public void setDueDate(final Date date) { this.dueDate = date; }
+    public void setDueDate(final String date) { this.dueDate = date; }
 
     @Override
     public String toString() {

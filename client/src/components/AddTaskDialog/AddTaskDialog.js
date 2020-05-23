@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Box from '@material-ui/core/Box';
 import Task from '../Task/Task';
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import TaskService from '../../service/TaskService';
 
 class AddTaskDialog extends React.Component {
     constructor(props) {
@@ -32,6 +33,14 @@ class AddTaskDialog extends React.Component {
         var dueDate;
         this.state.showDatePicker ? dueDate = this.state.selectedDate : dueDate = null;
         var task = this.createTask(this.state.title, this.state.subTasks, dueDate);
+        // POST to backend
+        var taskJson = {
+            title: task.props.title,
+            subTasks: task.props.subTasks,
+            dueDate: task.props.dueDate
+        };
+        TaskService.postTask(taskJson);
+        // Add to UI render list
         this.props.addTask(task);
     }
 

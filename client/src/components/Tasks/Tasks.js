@@ -45,12 +45,12 @@ class Tasks extends React.Component {
             showDialog: false
         }
         this.removeTask = this.removeTask.bind(this);
-        // TODO call this in TaskService
-        // this.getApiResponse();
+        TaskService.getAllTasks();
     }
 
     // Add a newly created task to the rendered list
     addTask(task) {
+        console.log(task.props.dueDate);
         this.setState({
             tasks: [
                 ...this.state.tasks,
@@ -99,6 +99,7 @@ class Tasks extends React.Component {
             >
                 <AddIcon />
             </Fab>
+            {/* TODO: Once POSTing is working, change the key to be the backend id of the task */}
             {this.state.showDialog ? <AddTaskDialog 
                                         taskKey={this.state.tasks.length}
                                         addTask={this.addTask.bind(this)} 
