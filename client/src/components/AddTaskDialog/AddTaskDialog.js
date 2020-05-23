@@ -10,6 +10,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import IconButton from '@material-ui/core/IconButton';
 import Box from '@material-ui/core/Box';
+import Task from '../Task/Task';
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 class AddTaskDialog extends React.Component {
@@ -30,7 +31,29 @@ class AddTaskDialog extends React.Component {
         event.preventDefault();
         var dueDate;
         this.state.showDatePicker ? dueDate = this.state.selectedDate : dueDate = null;
-        this.props.addTask(this.state.title, this.state.subTasks, dueDate);
+        var task = this.createTask(this.state.title, this.state.subTasks, dueDate);
+        this.props.addTask(task);
+    }
+
+    // Create a Task component and return it
+    createTask = (title, subTasks, dueDate) => {
+        if (dueDate !== null) {
+            const formattedDueDate = `${dueDate.toLocaleString('default', {month: 'long'})} ${dueDate.getDate()}`;
+            return (<Task
+                        key={this.props.taskKey}
+                        number={this.props.taskKey} 
+                        removeTask={this.props.removeTask}
+                        title={title}
+                        subTasks={subTasks}
+                        dueDate={formattedDueDate}/>)
+        } else {
+            return (<Task 
+                        key={this.props.taskKey}
+                        number={this.props.taskKey}
+                        removeTask={this.props.removeTask}
+                        title={title}
+                        subTasks={subTasks}/>)
+        }
     }
 
     // Handles changes to title and subtask the fields 
@@ -61,7 +84,6 @@ class AddTaskDialog extends React.Component {
         this.setState({
             subTaskFields: [
                 ...this.state.subTaskFields,
-                // Clean these attributes maybe lol
                 <TextField
                     key={this.state.subTaskFields.length}
                     name={`${this.state.subTaskFields.length}`}

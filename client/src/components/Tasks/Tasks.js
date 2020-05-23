@@ -2,11 +2,10 @@ import React from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import Box from '@material-ui/core/Box';
-import Task from '../Task/Task';
 import AddTaskDialog from '../AddTaskDialog/AddTaskDialog';
 import Typography from '@material-ui/core/Typography';
 import TaskService from '../../service/TaskService';
-import { withStyles, responsiveFontSizes } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
     content: {
@@ -46,40 +45,18 @@ class Tasks extends React.Component {
             showDialog: false
         }
         this.removeTask = this.removeTask.bind(this);
-        this.getApiResponse();
+        // TODO call this in TaskService
+        // this.getApiResponse();
     }
 
-    // Create a Task component and add it to the list of tasks
-    addTask(title, subTasks, dueDate) {
-        if (dueDate !== null) {
-            const formattedDueDate = `${dueDate.toLocaleString('default', {month: 'long'})} ${dueDate.getDate()}`;
-            this.setState({
-                tasks: [
-                    ...this.state.tasks,
-                    <Task 
-                        key={this.state.tasks.length} 
-                        number={this.state.tasks.length}
-                        removeTask={this.removeTask}
-                        title={title}
-                        subTasks={subTasks}
-                        dueDate={formattedDueDate}
-                    />
-                ]
-            });
-        } else {
-            this.setState({
-                tasks: [
-                    ...this.state.tasks,
-                    <Task 
-                        key={this.state.tasks.length} 
-                        number={this.state.tasks.length}
-                        removeTask={this.removeTask}
-                        title={title}
-                        subTasks={subTasks}
-                    />
-                ]
-            });
-        }
+    // Add a newly created task to the rendered list
+    addTask(task) {
+        this.setState({
+            tasks: [
+                ...this.state.tasks,
+                task
+            ]
+        });
         this.hideDialog();
     }
 
@@ -102,12 +79,6 @@ class Tasks extends React.Component {
         });
     }
 
-    getApiResponse() {
-        fetch('http://localhost:8080/tasks')
-            .then(response => response.json())
-            .then(data => console.log(data));
-    }
-
     render () {
       const { classes } = this.props;
 
@@ -128,8 +99,12 @@ class Tasks extends React.Component {
             >
                 <AddIcon />
             </Fab>
-            {/* Bind hideDialog to this Tasks reference, otherwise the close button on the dialog will be NPE */}
-            {this.state.showDialog ? <AddTaskDialog addTask={this.addTask.bind(this)} hideDialog={this.hideDialog.bind(this)} /> : null}
+            {this.state.showDialog ? <AddTaskDialog 
+                                        taskKey={this.state.tasks.length}
+                                        addTask={this.addTask.bind(this)} 
+                                        removeTask={this.removeTask.bind(this)}
+                                        hideDialog={this.hideDialog.bind(this)} /> 
+                                    : null}
         </div>
         )
     }
