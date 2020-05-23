@@ -15,8 +15,8 @@ class TaskService {
         for (let [key, taskData] of Object.entries(responseJson)) {
             taskComponents[key] = 
                 <Task
-                    key={key}
-                    number={key} 
+                    key={taskData.id}
+                    number={taskData.id} 
                     removeTask={removeTask}
                     title={taskData.title}
                     subTasks={taskData.subTasks}
@@ -32,9 +32,19 @@ class TaskService {
             headers: HEADERS,          
             body: JSON.stringify(taskJson)
         };
-        await fetch(`${API_URL}/addtask`, postOptions)
+        const response = await fetch(`${API_URL}/addtask`, postOptions);
+        console.log(`POST: ${response.status}`);
+        const responseJson = await response.json();
+        return responseJson;
+    }
+
+    async deleteTask(id) {
+        const deleteOptions = {
+            method: 'DELETE'
+        };
+        await fetch(`${API_URL}/delete/${id}`, deleteOptions)
             .then(response => {
-                console.log(response.status);
+                console.log(`DELETE: ${response.status}`);
             });
     }
 }

@@ -69,6 +69,8 @@ class Tasks extends React.Component {
     }
 
     removeTask(key) {
+        console.log(`Attempting to delete Task id = ${key}`);
+        TaskService.deleteTask(key);
         this.setState({
             tasks:
                 this.state.tasks.filter(task => task.props.number !== key)
@@ -109,7 +111,6 @@ class Tasks extends React.Component {
             </Fab>
             {/* TODO: Once POSTing is working, change the key to be the backend id of the task */}
             {this.state.showDialog ? <AddTaskDialog 
-                                        taskKey={this.state.tasks.length}
                                         addTask={this.addTask.bind(this)} 
                                         removeTask={this.removeTask.bind(this)}
                                         hideDialog={this.hideDialog.bind(this)} /> 

@@ -32,33 +32,36 @@ class AddTaskDialog extends React.Component {
         event.preventDefault();
         var dueDate;
         this.state.showDatePicker ? dueDate = this.state.selectedDate : dueDate = null;
-        var task = this.createTask(this.state.title, this.state.subTasks, dueDate);
         // Create JSON to POST
         var taskJson = {
-            title: task.props.title,
-            subTasks: Object.values(task.props.subTasks),
-            dueDate: task.props.dueDate
+            title: this.state.title,
+            subTasks: Object.values(this.state.subTasks),
+            dueDate: dueDate
         };
-        TaskService.postTask(taskJson);
-        // Add to UI render list
-        this.props.addTask(task);
+        TaskService.postTask(taskJson)
+            .then((taskId) => {
+                // if we succesfully POSTed a task, lets grab its ID and render it
+                var task = this.createTask(taskId, this.state.title, this.state.subTasks, dueDate);
+                this.props.addTask(task);
+            })
+            .catch((error) => console.log(error));
     }
 
     // Create a Task component and return it
-    createTask = (title, subTasks, dueDate) => {
+    createTask = (id, title, subTasks, dueDate) => {
         if (dueDate !== null) {
             const formattedDueDate = `${dueDate.toLocaleString('default', {month: 'long'})} ${dueDate.getDate()}`;
             return (<Task
-                        key={this.props.taskKey}
-                        number={this.props.taskKey} 
+                        key={id}
+                        number={id} 
                         removeTask={this.props.removeTask}
                         title={title}
                         subTasks={subTasks}
                         dueDate={formattedDueDate}/>)
         } else {
             return (<Task 
-                        key={this.props.taskKey}
-                        number={this.props.taskKey}
+                        key={id}
+                        number={id}
                         removeTask={this.props.removeTask}
                         title={title}
                         subTasks={subTasks}/>)

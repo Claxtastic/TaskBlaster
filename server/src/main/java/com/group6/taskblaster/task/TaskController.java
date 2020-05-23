@@ -2,8 +2,11 @@ package com.group6.taskblaster.task;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,10 +28,16 @@ public class TaskController {
     }
 
     @PostMapping("/addtask")
-    public void postTask(@RequestBody Task task) {
-        System.out.println(task.getSubTasks());
+    public long postTask(@RequestBody Task task) {
         repository.save(task);
-        // Task postedTask = repository.save(task);
-        // URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path()
+        // return the JPA generated ID
+        return task.getId();
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Long> deleteTask(@PathVariable Long id) {
+        Task task = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Task with id " + id + " not found"));
+        repository.delete(task);
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    } 
 }
