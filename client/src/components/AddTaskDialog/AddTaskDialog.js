@@ -33,10 +33,10 @@ class AddTaskDialog extends React.Component {
         var dueDate;
         this.state.showDatePicker ? dueDate = this.state.selectedDate : dueDate = null;
         var task = this.createTask(this.state.title, this.state.subTasks, dueDate);
-        // POST to backend
+        // Create JSON to POST
         var taskJson = {
             title: task.props.title,
-            subTasks: task.props.subTasks,
+            subTasks: Object.values(task.props.subTasks),
             dueDate: task.props.dueDate
         };
         TaskService.postTask(taskJson);

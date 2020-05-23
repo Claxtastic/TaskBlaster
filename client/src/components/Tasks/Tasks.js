@@ -59,7 +59,6 @@ class Tasks extends React.Component {
 
     // Add a newly created task to the rendered list
     addTask(task) {
-        console.log(task.props.dueDate);
         this.setState({
             tasks: [
                 ...this.state.tasks,

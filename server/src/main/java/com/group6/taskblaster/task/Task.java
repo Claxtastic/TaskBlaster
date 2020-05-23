@@ -20,26 +20,26 @@ public class Task {
     private String title;
 
     @ElementCollection(targetClass=String.class)
-    private List<String> subtasks;
+    private List<String> subTasks;
 
     private String dueDate;
 
     public Task() { }
 
-    public Task(String title, List<String> subtasks, String dueDate) {
+    public Task(String title, List<String> subTasks, String dueDate) {
         this.title = title;
-        this.subtasks = subtasks;
+        this.subTasks = subTasks;
         this.dueDate = dueDate;
     }
 
     public long getId() { return this.id; }
     public String getTitle() { return this.title; }
-    public List<String> getSubtasks() { return subtasks; }
+    public List<String> getSubTasks() { return subTasks; }
     public String getDueDate() { return this.dueDate; }
 
     public void setId(final long id) { this.id = id; }
     public void setTitle(final String title) { this.title = title; }
-    public void setSubttasks(final List<String> subtasks) { this.subtasks = subtasks; }
+    public void setSubTasks(final List<String> subTasks) { this.subTasks = subTasks; }
     public void setDueDate(final String date) { this.dueDate = date; }
 
     @Override

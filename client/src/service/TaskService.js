@@ -19,7 +19,7 @@ class TaskService {
                     number={key} 
                     removeTask={removeTask}
                     title={taskData.title}
-                    subTasks={taskData.subtasks}
+                    subTasks={taskData.subTasks}
                     dueDate={taskData.dueDate}/>
         }
         return taskComponents;
