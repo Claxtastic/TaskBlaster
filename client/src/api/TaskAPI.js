@@ -9,8 +9,11 @@ const HEADERS =  {
 
 class TaskAPI {
 
-    async getAllTasks(removeTask) {
-        const responseJson = await (await fetch(`${API_URL}/tasks`)).json();
+    async getAllTasks(removeTask) {        
+        const response = await fetch(`${API_URL}/tasks`);
+        console.log(`GET: ${response.status}`);
+        const responseJson = await response.json();
+        
         var taskComponents = [];
         for (let [key, taskData] of Object.entries(responseJson)) {
             taskComponents[key] = 
