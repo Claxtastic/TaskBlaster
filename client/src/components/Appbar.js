@@ -15,6 +15,8 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { MenuList, MenuItem } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import * as logo from '../images/logo_no_bg.png';
+import { withRouter } from "react-router-dom"
 
 const drawerWidth = 240;
 
@@ -60,13 +62,35 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     color: "white",
+  },
+  logo: {
+    height: "auto",
+    width: "auto",
+    maxHeight: "64px",
+    maxWidth: "250px",
+    paddingTop: "8px"
   }
 }));
 
-export default function Appbar() {
+function Appbar(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  const changeTitle = () => {
+    switch(window.location.pathname) {
+      case '/':
+        return 'Home';
+      case '/tasks':
+        return 'My Tasks';
+      case '/login':
+        return 'Login';
+      case '/signup':
+        return 'Sign Up';
+      default:
+        return 'Home';
+    }
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -75,9 +99,8 @@ export default function Appbar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  // TODO:
-  // Return different appbars for unauthenticated and authenticated
+  
+  let title = changeTitle();
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -101,9 +124,10 @@ export default function Appbar() {
               </IconButton>
             </Grid>
             <Grid item>
-              <Typography type="title" variant="h6" noWrap>
-                TaskBlaster
-              </Typography>
+              <img src={logo} className={classes.logo} alt="logo" />
+            </Grid>
+            <Grid item>
+              <Typography type="title" variant="h6" noWrap> {title} </Typography>
             </Grid>
             {/* Pad out the middle of the appbar */}
             <Grid item xs />
@@ -141,3 +165,4 @@ export default function Appbar() {
   );
 }
 
+export default withRouter(Appbar);

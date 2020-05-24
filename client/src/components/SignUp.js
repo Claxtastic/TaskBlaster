@@ -47,13 +47,13 @@ const changeHandler = () => {
 }
 
 function SignUp() {
+    document.title = "Sign Up | TaskBlaster"
+
     const classes = useStyles();
     return (
         <Box className={classes.content}>
             <CssBaseline />
-            <Typography className={classes.typography} component="h1" variant="h5">
-                Sign up
-            </Typography>
+            <Typography className={classes.typography} component="h1" variant="h5"> {document.title.split("|")[0]} </Typography>
             <form onSubmit={doSignUp} noValidate>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
