@@ -1,7 +1,7 @@
 import React from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
-import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 import AddTaskDialog from './AddTaskDialog';
 import Typography from '@material-ui/core/Typography';
 import TaskAPI from '../api/TaskAPI';
@@ -98,9 +98,18 @@ class Tasks extends React.Component {
                     <Typography className={classes.typography}>There are no tasks to show!</Typography> 
                     : null}
             {/* Container for the tasks */}
-            <Box className={classes.tasks}>
-                {this.state.tasks.map(task => task)}
-            </Box>
+            <Grid
+                container
+                direction="column"
+                justify="space-evenly"
+                alignItems="flex-start"
+            >
+                <Grid item>
+                    {this.state.tasks.map((task, index) =>  {
+                        return task;
+                    })};
+                </Grid>
+            </Grid>
             <Fab 
                 className={classes.fab}
                 color="secondary" 
@@ -109,7 +118,6 @@ class Tasks extends React.Component {
             >
                 <AddIcon />
             </Fab>
-            {/* TODO: Once POSTing is working, change the key to be the backend id of the task */}
             {this.state.showDialog ? <AddTaskDialog 
                                         addTask={this.addTask.bind(this)} 
                                         removeTask={this.removeTask.bind(this)}
