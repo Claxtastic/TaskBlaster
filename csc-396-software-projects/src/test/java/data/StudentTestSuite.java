@@ -13,11 +13,10 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 //Run tests on student class
-public class UserTestSuite {
+public class StudentTestSuite {
 
     /*
     All Constructor Tests
@@ -131,4 +130,31 @@ public class UserTestSuite {
         );
     }
 
+    //Test Equals Method
+    @Test
+    @DisplayName("Equals method tests")
+    void studentEqualsTest() {
+        User kid = new UserStudent("Gonzo Bing", "crusty5");
+        UserStudent kid2 = new UserStudent("Brad Jitt", "brown2");
+        assertEquals(kid, kid);
+        assertNotEquals(kid, kid2);
+        assertEquals(UserStudent.class, kid.getClass());
+    }
+
+    //Test arguments equals method
+    @ParameterizedTest(name = "Test arguments in equals method")
+    @MethodSource("studentEqualsTests")
+    void studentArgumentsEqualsTest(String name, String pass, String name2, String pass2, boolean result) {
+        UserStudent kid = new UserStudent(name, pass);
+        UserStudent kid2 = new UserStudent(name2, pass2);
+        assertEquals(result, kid.equals(kid2));
+    }
+
+    private static Stream<Arguments> studentEqualsTests() {
+        return Stream.of(
+                Arguments.of("Jimbo Jones", "boobs","Jimbo Jones", "boobs", true),
+                Arguments.of("Larry Finch", "weenie", "Connie Finch", "weenie", false),
+                Arguments.of("John Brown", "junk20", "John Brown", "junk30", false)
+        );
+    }
 }
