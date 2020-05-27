@@ -62,7 +62,7 @@ abstract class UserCommonCode {
      */
     public boolean equals(Object that) {
 
-        //If object is null, return null pointer exception
+        //If object is null, return false
 
         //If object is compared with itself then true
         if (that == this) {
